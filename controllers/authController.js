@@ -3,6 +3,7 @@ const authService = require("../services/authService");
 
 // Register (Kayıt Olma) Endpointi
 exports.register = async (req, res) => {
+
     const { error } = registerValidate(req.body);
     if (error) return res.status(400).json({ error });
 
@@ -11,7 +12,8 @@ exports.register = async (req, res) => {
         res.status(201).json({ message: "Kullanıcı başarıyla kaydedildi." });
     }
     catch (error) {
-        res.status(500).json({ error: "Sunucu hatası !!" });
+        console.log(error)
+        res.status(500).json({ error: error.message});
     }
 };
 
@@ -25,7 +27,7 @@ exports.login = async (req, res) => {
         res.json({ token });
     }
     catch (err) {
-        res.status(500).json({ error: "Sunucu hatası !!" });
+        res.status(500).json({ error: error.message});
     }
 };
 
