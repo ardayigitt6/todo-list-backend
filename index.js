@@ -10,6 +10,12 @@ const todoController = require("./controllers/todoController");
 const app = express(); // express uygulamasını(app) başalttım.
 app.use(express.json()); // Sunucuya gelen verileri kolayca okuyabilmek için JSON formatına çevirir.
 app.use(cors()); // CORS ayarlarını yapar, böylece farklı domainlerden gelen istekler kabul edelir.
+// index.js (en üstlerde bir yere ekle, routerdan önce)
+app.use((req, res, next) => {
+  console.log(`[${new Date().toLocaleString()}] ${req.method} ${req.url}`);
+  next();
+});
+
 
 mongoose
   .connect(process.env.MONGO_URL) // .env dosyasındaki MONGO_URL ile MongoDB'ye bağlanıyor.

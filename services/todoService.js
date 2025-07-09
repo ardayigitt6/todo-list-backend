@@ -25,18 +25,18 @@ exports.getTodos = async (owner, query) => {
 };
 
 exports.createTodo = async (title, owner) => {
-    return await todoDataAccess.createTodo({ title, owner });
+    return await todoDataAccess.createTodo( title, owner );
 };
 
 exports.updateTodo = async (id, owner, title) => {
-    return await todoDataAccess.updateTodo({ id, owner, title });
+    return await todoDataAccess.updateTodo( id, owner, title );
 };
 
 exports.deleteTodo = async (id, owner) => {
-    return await todoDataAccess.deleteTodo({ id, owner });
+    return await todoDataAccess.deleteTodo( id, owner );
 };
 
-exports.toggleComplate = async (id, owner) => {
+exports.toggleComplete = async (id, owner) => {
     const todo = await todoDataAccess.findTodoById(id, owner);
     if (!todo) return null;
     todo.completed = !todo.completed;
