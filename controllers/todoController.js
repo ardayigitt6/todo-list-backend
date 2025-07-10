@@ -8,7 +8,7 @@ exports.getTodos = async (req, res) => {
         const result = await todoService.getTodos(req.user.owner, req.query);
         res.json(result);
     }
-    catch (err) {
+    catch (error) {
         console.error("getTodos HATASI:", err);
         res.status(500).json({ error: "Sunucu hatası !!" });
     }
@@ -21,12 +21,14 @@ exports.createTodo = async (req, res) => {
     if (error) return res.status(400).json({ error });
 
     try {
-        const newTodo = await todoService.createTodo(req.body.title, req.user.owner);
+        const newTodo = await todoService.createTodo({
+            title:req.body.title, 
+            owner:req.user.owner});
         res.status(201).json(newTodo);
     }
     catch (error) {
-         console.error("createTodo HATASI:", err);
-        res.status(500).json({ error: "Sunucu hatası !!" });
+         console.error("createTodo HATASI:", error);
+        res.status(500).json({ error: error.message});
     }
 };
 
