@@ -7,6 +7,8 @@ exports.getTodos = async (owner, query) => {
     const shouldHideCompleted = query.shouldHideCompleted === "true";
     const sortOrder = query.sortOrder === "asc" ? 1 : -1;
     const skip = (page - 1) * limit;
+   
+
 
     const dbQuery = { owner, ...(search ? { title: { $regex: search, $options: "i" } } : {}) };
     if (shouldHideCompleted) {
